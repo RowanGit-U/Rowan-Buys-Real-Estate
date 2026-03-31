@@ -3,72 +3,462 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rowan's Website</title>
+  <title>Rowan Buys Real Estate | We Buy Houses Fast</title>
+  <meta name="description" content="Sell your house fast for cash. Rowan Buys Real Estate provides fair cash offers with no fees, no repairs, and a quick closing process." />
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark: #1a3c2a;
+      --green-mid: #2d6a4f;
+      --green-light: #52b788;
+      --green-pale: #d8f3dc;
+      --gold: #c9a84c;
+      --gold-light: #f0dfa0;
+      --white: #ffffff;
+      --gray-light: #f5f5f5;
+      --gray: #666;
+      --dark: #1a1a1a;
+    }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #222;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
     }
-    header {
-      background: #111;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
+
+    /* Navigation */
+    nav {
+      background: var(--green-dark);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    section {
-      max-width: 900px;
-      margin: auto;
-      padding: 50px 20px;
-    }
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 14px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      margin-top: 20px;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background: #111;
-      color: white;
+    nav .logo {
+      color: var(--white);
+      font-size: 1.3rem;
+      font-weight: 700;
       text-decoration: none;
-      border-radius: 8px;
+      letter-spacing: 0.5px;
     }
-    footer {
+    nav .logo span { color: var(--gold); }
+    nav .nav-links { display: flex; gap: 24px; align-items: center; }
+    nav .nav-links a {
+      color: var(--green-pale);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: var(--gold); }
+    nav .nav-cta {
+      background: var(--gold);
+      color: var(--green-dark);
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    nav .nav-cta:hover { background: var(--gold-light); }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      color: var(--white);
+      padding: 100px 24px 80px;
       text-align: center;
-      padding: 30px 20px;
-      color: #666;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 650px;
+      margin: 0 auto 36px;
+      color: var(--green-pale);
+    }
+    .hero .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--green-dark);
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--green-light);
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* Trust bar */
+    .trust-bar {
+      background: var(--green-pale);
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      font-weight: 700;
+      color: var(--green-dark);
+      font-size: 1rem;
+    }
+    .trust-item span {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--green-mid);
+    }
+
+    /* Sections */
+    .section {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-alt { background: var(--gray-light); }
+    .section-alt .section { padding-top: 80px; padding-bottom: 80px; }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--green-dark);
+    }
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    /* How it works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+    }
+    .step {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--green-mid);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .step h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--green-dark); }
+    .step p { color: var(--gray); font-size: 0.95rem; }
+
+    /* Benefits */
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .benefit {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 24px;
+      background: var(--white);
+      border-radius: 12px;
+      border-left: 4px solid var(--green-light);
+    }
+    .benefit-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      width: 48px;
+      text-align: center;
+    }
+    .benefit h3 { font-size: 1.05rem; margin-bottom: 4px; color: var(--green-dark); }
+    .benefit p { color: var(--gray); font-size: 0.9rem; }
+
+    /* Situations */
+    .situations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .situation {
+      background: var(--white);
+      padding: 24px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      font-weight: 600;
+      color: var(--green-dark);
+      font-size: 1rem;
+    }
+    .situation .icon { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      color: var(--white);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .cta-banner h2 { font-size: 2.2rem; margin-bottom: 12px; }
+    .cta-banner p {
+      font-size: 1.15rem;
+      color: var(--green-pale);
+      max-width: 550px;
+      margin: 0 auto 32px;
+    }
+
+    /* Contact section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .contact-card {
+      text-align: center;
+      padding: 36px 24px;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .contact-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .contact-card h3 { color: var(--green-dark); margin-bottom: 8px; }
+    .contact-card a {
+      color: var(--green-mid);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .contact-card a:hover { color: var(--gold); }
+    .contact-card p { color: var(--gray); font-size: 0.9rem; margin-top: 4px; }
+
+    /* Footer */
+    footer {
+      background: var(--green-dark);
+      color: var(--green-pale);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    footer .footer-links { margin-bottom: 16px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    footer .copyright { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.05rem; }
+      .section-title { font-size: 1.7rem; }
+      nav .nav-links { display: none; }
+      .trust-bar { gap: 24px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Website</h1>
-    <p>Built for free and ready to grow.</p>
-  </header>
 
-  <section>
-    <div class="card">
-      <h2>About Me</h2>
-      <p>
-        Hi, I’m Rowan. This is my personal website where I can share my work,
-        projects, business ideas, and contact information.
-      </p>
-      <a class="btn" href="mailto:youremail@example.com">Contact Me</a>
+  <!-- Navigation -->
+  <nav>
+    <a class="logo" href="#">Rowan Buys <span>Real Estate</span></a>
+    <div class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#benefits">Why Us</a>
+      <a href="#situations">We Can Help</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cta" href="tel:4017432929">Call Now: (401) 743-2929</a>
     </div>
+  </nav>
 
-    <div class="card">
-      <h2>Projects</h2>
-      <p>Add your portfolio, business, resume, sports work, or real estate work here.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>We Buy Houses <span>Fast for Cash</span></h1>
+    <p>No repairs. No fees. No hassle. Get a fair cash offer on your property and close on your timeline.</p>
+    <div class="cta-group">
+      <a class="btn-primary" href="tel:4017432929">Get Your Cash Offer</a>
+      <a class="btn-secondary" href="#how-it-works">See How It Works</a>
     </div>
   </section>
 
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="trust-item"><span>$0</span>Fees or Commissions</div>
+    <div class="trust-item"><span>7-14</span>Days to Close</div>
+    <div class="trust-item"><span>100%</span>Free, No-Obligation Offer</div>
+    <div class="trust-item"><span>Any</span>Condition Accepted</div>
+  </div>
+
+  <!-- How It Works -->
+  <div class="section-alt">
+    <div class="section" id="how-it-works">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Selling your house shouldn't be complicated. We make it simple in three easy steps.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Contact Us</h3>
+          <p>Call us or fill out our contact info. Tell us about your property and your situation. There's zero obligation.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Get a Cash Offer</h3>
+          <p>We'll evaluate your property and present you with a fair, no-obligation cash offer, often within 24 hours.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Close & Get Paid</h3>
+          <p>Pick your closing date. We handle all the paperwork. You walk away with cash in hand.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Benefits -->
+  <div class="section" id="benefits">
+    <h2 class="section-title">Why Sell to Rowan Buys Real Estate?</h2>
+    <p class="section-subtitle">We're local investors who care about helping homeowners. Here's why people choose us.</p>
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">&#9889;</div>
+        <div>
+          <h3>Fast Closing</h3>
+          <p>Close in as little as 7 days. No waiting months for a buyer to get financing.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">&#128176;</div>
+        <div>
+          <h3>No Fees or Commissions</h3>
+          <p>Keep more of your money. We cover all closing costs and there are zero agent commissions.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">&#128736;</div>
+        <div>
+          <h3>No Repairs Needed</h3>
+          <p>Sell your house as-is. Don't spend a dime fixing up your property before selling.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">&#128203;</div>
+        <div>
+          <h3>No Showings or Open Houses</h3>
+          <p>Skip the stress of keeping your home spotless for strangers walking through.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">&#128198;</div>
+        <div>
+          <h3>You Choose the Closing Date</h3>
+          <p>Need to close fast? Need more time? We work on your schedule, not ours.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">&#129309;</div>
+        <div>
+          <h3>Honest & Transparent</h3>
+          <p>No pressure, no gimmicks. We give you a fair offer and you decide if it works for you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Situations -->
+  <div class="section-alt">
+    <div class="section" id="situations">
+      <h2 class="section-title">We Buy Houses in Any Situation</h2>
+      <p class="section-subtitle">No matter what you're going through, we can help. We've worked with homeowners facing all kinds of challenges.</p>
+      <div class="situations-grid">
+        <div class="situation"><span class="icon">&#127968;</span>Inherited Property</div>
+        <div class="situation"><span class="icon">&#128275;</span>Foreclosure</div>
+        <div class="situation"><span class="icon">&#128148;</span>Divorce</div>
+        <div class="situation"><span class="icon">&#128296;</span>Major Repairs Needed</div>
+        <div class="situation"><span class="icon">&#127970;</span>Vacant Property</div>
+        <div class="situation"><span class="icon">&#128182;</span>Behind on Payments</div>
+        <div class="situation"><span class="icon">&#128666;</span>Relocating</div>
+        <div class="situation"><span class="icon">&#128100;</span>Tired Landlord</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner">
+    <h2>Ready to Sell Your House?</h2>
+    <p>Get a fair, no-obligation cash offer today. The process is simple, fast, and completely free.</p>
+    <a class="btn-primary" href="tel:4017432929">Call (401) 743-2929 Now</a>
+  </div>
+
+  <!-- Contact -->
+  <div class="section" id="contact">
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-subtitle">Reach out anytime. We're here to help and there's never any obligation.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="icon">&#128222;</div>
+        <h3>Phone</h3>
+        <a href="tel:4017432929">(401) 743-2929</a>
+        <p>Call or text anytime</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">&#9993;</div>
+        <h3>Email</h3>
+        <a href="mailto:rowanbuysre@gmail.com">rowanbuysre@gmail.com</a>
+        <p>We respond within 24 hours</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">&#127760;</div>
+        <h3>Website</h3>
+        <a href="https://rowanbuysrealestate.com" target="_blank" rel="noopener">rowanbuysrealestate.com</a>
+        <p>Learn more about us</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer>
-    © 2026 Rowan. All rights reserved.
+    <div class="footer-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#benefits">Why Us</a>
+      <a href="#situations">Situations</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p>Rowan Buys Real Estate &middot; <a href="tel:4017432929">(401) 743-2929</a> &middot; <a href="mailto:rowanbuysre@gmail.com">rowanbuysre@gmail.com</a></p>
+    <p class="copyright">&copy; 2026 Rowan Buys Real Estate. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
